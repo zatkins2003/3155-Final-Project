@@ -60,3 +60,54 @@
     background-color: #f0f0f0;
   }
   /*HEADER END*/
+
+  /*PLANNER START*/
+
+  .planner_form{
+    display:flex;
+    flex-direction:row;
+    margin:50px;
+    margin-top:20px;
+    margin-bottom:10px;
+    align-items: center;
+    justify-content: center;
+    gap:10px;
+  }
+
+  .planner_title{
+    width:100%;
+    text-align: center;
+  }
+
+  .planner_container{
+    padding:20px;
+  }
+
+  .planner_days{
+    display:flex;
+    justify-content: space-around;
+    
+  }
+
+  .bar {
+    width: 220px;
+    background-color: lightblue;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+  .task_container{
+    min-height:500px;
+  }
+
+  .task{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 220px;
+    border-style: none;
+    background-color: lightblue;
+  }
+
+  /*Planner END*/
