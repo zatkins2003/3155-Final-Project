@@ -13,6 +13,16 @@ tasks = {
     'Saturday': []
 }
 
+events = {
+    'Sunday': [],
+    'Monday': [],
+    'Tuesday': [],
+    'Wednesday': [],
+    'Thursday': [],
+    'Friday': [],
+    'Saturday': []
+}
+
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -33,9 +43,24 @@ def about():
 def gpa_tracker():
     return render_template('gpa.html')
 
-@app.route('/schedule')
+@app.route('/schedule', methods=['GET','POST'])
 def schedule():
-    return render_template('schedule.html')
+    if request.method == 'POST':
+        if 'add_event' in request.form:
+            event_name = request.form['event_name']
+            day_of_week = request.form['due_date']
+            time = request.form['time']
+            events[day_of_week].append(f'{event_name}: {time}')
+
+        elif 'remove_event' in request.form:
+            day_of_week = request.form['day_of_week']
+            event_name = request.form['event_name']
+            events[day_of_week] = [event for event in events[day_of_week] if event.split(':')[0].strip() != event_name]
+
+    return render_template('schedule.html', sunday_events=events['Sunday'], monday_events=events['Monday'], 
+        tuesday_events=events['Tuesday'], wednesday_events=events['Wednesday'], 
+        thursday_events=events['Thursday'], friday_events=events['Friday'], 
+        saturday_events=events['Saturday'])
 
 @app.route('/planner', methods=['GET', 'POST'])
 def planner():

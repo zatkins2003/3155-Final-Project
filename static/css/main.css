@@ -110,4 +110,19 @@
     background-color: lightblue;
   }
 
+  .event_container{
+    min-height:500px;
+
+  }
+
+  .event{
+    overflow:hidden;
+    text-overflow: ellipsis;
+    max-width: 220px;
+    border-style:none;
+    background-color: lightblue;
+  }
+
   /*Planner END*/
+
+
