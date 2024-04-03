@@ -5,6 +5,7 @@
 {% endblock %}
 {%block title %}Schedule{% endblock %}
 {% block body %}
+<main class="Schedule-Planner">
 <h2 class="planner_title">Add Event</h2>
     <form class="planner_form" action="{{ url_for('schedule') }}" method="POST">
         <label for="event_name">Event Name:</label>

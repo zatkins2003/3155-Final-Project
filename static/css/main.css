@@ -3,26 +3,26 @@
     margin: 0px;
   }
   
-  header {
+  .header{
     background-color: #d8d8d8;
   }
   
-  .header-block {
+  .header .header-block {
     display: flex;
     align-items: center;
     padding:5px;
   }
 
-  .logo{
+  .header .logo{
     width:100px;
     height:auto;
   }
   
-  .title {
+  .header .title {
     margin: 0 20px;
   }
   
-  .login-container {
+  .header .login-container {
     display: flex;
     position:absolute;
     right: 25px;
@@ -30,24 +30,24 @@
     gap:10px;
   }
   
-  .login-container button {
+  .header .login-container button {
     margin-left: 10px;
     border:none;
     background-color: #fff;
     padding:5px 20px;
   }
 
-  .login-container button:hover{
+  .header .login-container button:hover{
     background-color: #f0f0f0;
   }
   
-  .nav-block {
+  .header .nav-block {
     display: flex;
     padding: 10px;
     background-color: rgb(202, 202, 202);
   }
   
-  .nav-block button {
+  .header .nav-block button {
     flex-grow: 1;
     margin: 0 5px;
     padding: 8px 16px;
@@ -56,14 +56,14 @@
     cursor: pointer;
   }
   
-  .nav-block button:hover {
+  .header .nav-block button:hover {
     background-color: #f0f0f0;
   }
   /*HEADER END*/
 
-  /*PLANNER START*/
+  /*PLANNER AND SCHEDULE START*/
 
-  .planner_form{
+  .Schedule-Planner .planner_form{
     display:flex;
     flex-direction:row;
     margin:50px;
@@ -74,22 +74,22 @@
     gap:10px;
   }
 
-  .planner_title{
+  .Schedule-Planner .planner_title{
     width:100%;
     text-align: center;
   }
 
-  .planner_container{
+  .Schedule-Planner .planner_container{
     padding:20px;
   }
 
-  .planner_days{
+  .Schedule-Planner .planner_days{
     display:flex;
     justify-content: space-around;
     
   }
 
-  .bar {
+  .Schedule-Planner .bar {
     width: 220px;
     background-color: lightblue;
     display: flex;
@@ -98,11 +98,11 @@
     justify-content: center;
 }
 
-  .task_container{
+.Schedule-Planner .task_container{
     min-height:500px;
   }
 
-  .task{
+  .Schedule-Planner .task{
     overflow: hidden;
     text-overflow: ellipsis;
     max-width: 220px;
@@ -110,12 +110,12 @@
     background-color: lightblue;
   }
 
-  .event_container{
+  .Schedule-Planner .event_container{
     min-height:500px;
 
   }
 
-  .event{
+  .Schedule-Planner .event{
     overflow:hidden;
     text-overflow: ellipsis;
     max-width: 220px;
@@ -123,6 +123,6 @@
     background-color: lightblue;
   }
 
-  /*Planner END*/
+  /*PLANNER AND SCHEDULEEND*/
 
-
+  
