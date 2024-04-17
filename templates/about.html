@@ -1,6 +1,14 @@
-{% extends 'base.html' %}
-
 {% block head %}
+    <style>
+        .about {
+            font-size: 1.1em; 
+        }
+
+        .faq-section {
+            font-size: 0.9em; 
+            margin-top: 20px;
+        }
+    </style>
 {% endblock %}
 
 {% block title %}About{% endblock %}
@@ -19,6 +27,23 @@
         <p>Say goodbye to stress and hello to easy planning with Study Planner. Your grades will love you for it!</p>
     </section>
     <!-- (Jordan Grandison) END -->
+
+    <!-- Frequently Asked Questions Section -->
+    <section class="faq-section">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq">
+            <h3>Q: Is PlanPro available on mobile devices?</h3>
+            <p>A: No, PlanPro is not currently available on iOS or Android devices.</p>
+        </div>
+        <div class="faq">
+            <h3>Q: Can I use PlanPro for free?</h3>
+            <p>A: Yes, PlanPro is free for everyone to use.</p>
+        </div>
+        <div class="faq">
+        <h3>Q: Is my data secure with PlanPro?</h3>
+        <p>A: Yes, we take data security seriously. PlanPro uses encryption and other security measures to protect your personal information.</p>
+    </div>
+    </section>
 </main>
 <footer>
 </footer>
