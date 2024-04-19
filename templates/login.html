@@ -1,14 +1,50 @@
 {% extends 'base.html' %}
 
 {% block head %}
-
+    <title>Login</title>
+    <link rel="stylesheet" href="styles.css">
 {% endblock %}
-{%block title %}login{% endblock %}
-{% block body %}
-<main>
-    
-</main>
-<footer>
 
+{% block body %}
+<main class="login">
+    <div id="loginContainer">
+        <h2>Login</h2>
+        <form id="loginForm">
+            <label for="username">Username:</label>
+            <input type="text" id="loginUsername" name="username" required><br>
+            <label for="password">Password:</label>
+            <input type="password" id="loginPassword" name="password" required><br>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+</main>
+
+<footer>
 </footer>
+
+<script src="scripts.js"></script>
+<script>
+    document.getElementById("loginForm").addEventListener("submit", function(event) {
+        event.preventDefault(); 
+        var username = document.getElementById("loginUsername").value;
+        var password = document.getElementById("loginPassword").value;
+        fetch("/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ username: username, password: password })
+        })
+        .then(response => {
+            if (response.ok) {
+                console.log("Login successful");
+            } else {
+                console.error("Login failed:", response.statusText);
+            }
+        })
+        .catch(error => {
+            console.error("Error during login:", error);
+        });
+    });
+</script>
 {% endblock %}

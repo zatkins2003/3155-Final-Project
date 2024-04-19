@@ -9,7 +9,7 @@
     <h2 class="planner_title">Add Task</h2>
     <form class="planner_form" action="{{ url_for('planner') }}" method="POST">
         <label for="task_name">Task Name:</label>
-        <input type="text" id="task_name" name="task_name" required><br>
+        <input id='inputField' type="text" id="task_name" name="task_name" pattern="[a-zA-Z0-9 ]+" title="Please enter alphanumeric characters and spaces only" required><br>
 
         <label for="due_date">Due Date:</label>
             <select id="due_date" name="due_date" required>
@@ -30,93 +30,40 @@
 
         <button type="submit" name="add_task">Add Task</button>
     </form>
+    <form method="POST" action="/planner">
+        <button class="showChartBTN" type="submit" name="show_chart">Show Chart</button>
+    </form>
     <div class="planner_container">
         <div class="planner_days">
+            {% for day in daysOfWeekAry %}
             <div class="bar">
-                <p>Sunday</p>
+                <p class="bar-title">{{ day }}</p>
                 <div class="task_container">
-                    {% for task in sunday_tasks %}           <!--used chatgpt for this it dynamically adds more <p> elements-->
+                    {% for task in tasks[day] %}
+                        <button class ="task" onclick="showWindow('{{ day }}', '{{ task.split(':')[0].replace(" ", "") }}')">{{ task }}</button>
+                        <div class="window hidden {{ day }} {{ task.split(':')[0].replace(" ", "") }}">
+                            <p>Day: {{ day }}</p>
+                            <p>Task: {{ task.split(':')[0] }}</p>
+                            <p>Grade Weight: {{ task.split(':')[1] }}</p>
                             <form method="POST" action="/planner" onsubmit="return confirmDelete()">
-                                <input type="hidden" name="day_of_week" value="Sunday">
-                                <input type="hidden" name="task_name" value="{{ task.split(':')[0].strip() }}">
-                                <button class="task" type="submit" name="remove_task">{{ task }}</button>
+                                <input type="hidden" name="day_of_week" value="{{ day }}">
+                                <input type="hidden" name="task_name" value="{{ task }}">
+                                <button class="deleteBTN" type="submit" name="remove_task">DELETE</button>
                             </form>
+                            <button class="closeWindowBTN" onclick="hideWindow('{{ day }}', '{{ task.split(':')[0].replace(" ", "") }}')">Close Window</button>
+                        </div>
                         {% endfor %}
                 </div>
             </div>
-            <div class="bar">
-                <p>Monday</p>
-                <div class="task_container">
-                    {% for task in monday_tasks %}           <!--used chatgpt for this it dynamically adds more <p> elements-->
-                            <form method="POST" action="/planner" onsubmit="return confirmDelete()">
-                                <input type="hidden" name="day_of_week" value="Monday">
-                                <input type="hidden" name="task_name" value="{{ task.split(':')[0].strip() }}">
-                                <button class="task" type="submit" name="remove_task">{{ task }}</button>
-                            </form>
-                        {% endfor %}
-                </div>
-            </div>
-            <div class="bar">
-                <p>Tuesday</p>
-                <div class="task_container">
-                    {% for task in tuesday_tasks %}           <!--used chatgpt for this it dynamically adds more <p> elements-->
-                        <form method="POST" action="/planner" onsubmit="return confirmDelete()">
-                            <input type="hidden" name="day_of_week" value="Tuesday">
-                            <input type="hidden" name="task_name" value="{{ task.split(':')[0].strip() }}">
-                            <button class="task" type="submit" name="remove_task">{{ task }}</button>
-                        </form>
-                        {% endfor %}
-                </div>
-            </div>
-            <div class="bar">
-                <p>Wednesday</p>
-                <div class="task_container">
-                    {% for task in wednesday_tasks %}           <!--used chatgpt for this it dynamically adds more <p> elements-->
-                        <form method="POST" action="/planner" onsubmit="return confirmDelete()">
-                            <input type="hidden" name="day_of_week" value="Wednesday">
-                            <input type="hidden" name="task_name" value="{{ task.split(':')[0].strip() }}">
-                            <button class="task" type="submit" name="remove_task">{{ task }}</button>
-                        </form>
-                        {% endfor %}
-                </div>
-            </div>
-            <div class="bar">
-                <p>Thursday</p>
-                <div class="task_container">
-                    {% for task in thursday_tasks %}           <!--used chatgpt for this it dynamically adds more <p> elements-->
-                        <form method="POST" action="/planner" onsubmit="return confirmDelete()">
-                            <input type="hidden" name="day_of_week" value="Thursday">
-                            <input type="hidden" name="task_name" value="{{ task.split(':')[0].strip() }}">
-                            <button class="task" type="submit" name="remove_task">{{ task }}</button>
-                        </form>
-                        {% endfor %}
-                </div>
-            </div>
-            <div class="bar">
-                <p>Friday</p>
-                <div class="task_container">
-                    {% for task in friday_tasks %}           <!--used chatgpt for this it dynamically adds more <p> elements-->
-                        <form method="POST" action="/planner" onsubmit="return confirmDelete()">
-                            <input type="hidden" name="day_of_week" value="Friday">
-                            <input type="hidden" name="task_name" value="{{ task.split(':')[0].strip() }}">
-                            <button class="task" type="submit" name="remove_task">{{ task }}</button>
-                        </form>
-                        {% endfor %}
-                </div>
-            </div>
-            <div class="bar">
-                <p>Saturday</p>
-                <div class="task_container">
-                    {% for task in saturday_tasks %}           <!--used chatgpt for this it dynamically adds more <p> elements-->
-                        <form method="POST" action="/planner" onsubmit="return confirmDelete()">
-                            <input type="hidden" name="day_of_week" value="Saturday">
-                            <input type="hidden" name="task_name" value="{{ task.split(':')[0].strip() }}">
-                            <button class="task" type="submit" name="remove_task">{{ task }}</button>
-                        </form>
-                        {% endfor %}
-                </div>
-            </div>
+            {% endfor %}
+            
         </div>
+    </div>
+    <div class="window {{ hidden }} chart">
+        <img src="{{ url_for('static', filename='mychart2.png') }}" alt="myChart2">
+        <form method="POST" action="/planner">
+            <button class="closeWindowBTN" type="submit" name="hide_chart">Hide Chart</button>
+        </form>
     </div>
 </main>
 <footer>
@@ -124,11 +71,20 @@
 </footer>
 <script>
     function confirmDelete() {
-        if (confirm("Are you sure you want to delete this task?")) {
+        if (confirm("Are you sure you want to delete this Task?")) {
             return true;
         } else {
             return false;
         }
     }
+    function showWindow(day_of_week, task) {
+        const window = document.querySelector(`.${task}.${day_of_week}.window.hidden`);
+        window.classList.remove('hidden');
+    }
+    function hideWindow(day_of_week, task) {
+        const window = document.querySelector(`.${task}.${day_of_week}.window`);
+        window.classList.add('hidden');
+    }
+
 </script>
 {% endblock %}
