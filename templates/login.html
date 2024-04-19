@@ -17,17 +17,6 @@
             <button type="submit">Login</button>
         </form>
     </div>
-
-    <div id="signupContainer">
-        <h2>Sign Up</h2>
-        <form id="signupForm">
-            <label for="newUsername">New Username:</label>
-            <input type="text" id="signupUsername" name="newUsername" required><br>
-            <label for="newPassword">New Password:</label>
-            <input type="password" id="signupPassword" name="newPassword" required><br>
-            <button type="submit">Sign Up</button>
-        </form>
-    </div>
 </main>
 
 <footer>
@@ -55,29 +44,6 @@
         })
         .catch(error => {
             console.error("Error during login:", error);
-        });
-    });
-
-    document.getElementById("signupForm").addEventListener("submit", function(event) {
-        event.preventDefault(); 
-        var username = document.getElementById("signupUsername").value;
-        var password = document.getElementById("signupPassword").value;
-        fetch("/signup", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ username: username, password: password })
-        })
-        .then(response => {
-            if (response.ok) {
-                console.log("Signup successful");
-            } else {
-                console.error("Signup failed:", response.statusText);
-            }
-        })
-        .catch(error => {
-            console.error("Error during signup:", error);
         });
     });
 </script>
