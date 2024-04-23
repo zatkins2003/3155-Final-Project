@@ -111,3 +111,64 @@
   }
 
   /*Planner END*/
+
+
+/* GPA Calculator Styles */
+.gpa-form {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  background: lightblue;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.gpa-form .course {
+  margin-bottom: 10px;
+}
+
+.gpa-form label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.gpa-form input[type="text"],
+.gpa-form input[type="number"] {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid lightblue;
+  border-radius: 4px;
+}
+
+.gpa-form button {
+  padding: 10px 20px;
+  margin-top: 10px;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.gpa-form button:hover {
+  background-color: #0056b3;
+}
+
+/* Styles for course list */
+.course-list {
+  margin-top: 20px;
+  padding: 15px;
+  background: #f8f8f8;
+  border-left: 5px solid #007BFF;
+}
+
+.course-list li {
+  margin-bottom: 10px;
+}
+
+/* Error Message Styles */
+.error-message {
+  color: red;
+  margin-top: 20px;
+}
