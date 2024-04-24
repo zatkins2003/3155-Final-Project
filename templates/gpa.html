@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 {% endblock %}
 
 {% block title %}
@@ -8,9 +9,9 @@ GPA Calculator
 {% endblock %}
 
 {% block body %}
-<main>
+<main class="gpa">
     <h1>GPA Calculator</h1>
-    <form action="{{ url_for('calculate_gpa') }}" method="post">
+    <form class="gpa-form" action="{{ url_for('calculate_gpa') }}" method="post">
         <div id="courseInputs">
             <div class="course">
                 <label for="course_name">Course Name:</label>
@@ -25,7 +26,7 @@ GPA Calculator
         <button type="submit">Calculate GPA</button>
     </form>
     {% if courses %}
-    <ul>
+    <ul class="course-list">
         {% for course in courses %}
         <li>{{ course.name }} - Grade: {{ course.grade }}, Credits: {{ course.credits }}, Calculated GPA: {{ course.gpa }}</li>
         {% endfor %}
@@ -35,7 +36,7 @@ GPA Calculator
         <h2>Your GPA is: {{ gpa }}</h2>
     {% endif %}
     {% if error %}
-        <p style="color: red;">{{ error }}</p>
+        <p class="error-message">{{ error }}</p>
     {% endif %}
 </main>
 <script>
