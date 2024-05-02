@@ -1,50 +1,26 @@
 {% extends 'base.html' %}
 
 {% block head %}
-    <title>Sign Up</title>
-    <link rel="stylesheet" href="styles.css">
 {% endblock %}
+{% block title %}Sign Up{% endblock %}
 
 {% block body %}
 <main class="signup">
-    <div id="signupContainer">
+    <div id="loginContainer">
         <h2>Sign Up</h2>
-        <form id="signupForm">
-            <label for="newUsername">New Username:</label>
-            <input type="text" id="signupUsername" name="newUsername" required><br>
-            <label for="newPassword">New Password:</label>
-            <input type="password" id="signupPassword" name="newPassword" required><br>
-            <button type="submit">Sign Up</button>
+        <form id="loginForm" method="POST" action="/signup">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required><br>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required><br>
+            <button type="submit" name="signup">Login</button>
         </form>
+        {% if error_message %}
+        <div class="alert alert-warning">{{ error_message }}</div>
+        {% endif %}
     </div>
 </main>
 
 <footer>
 </footer>
-
-<script src="scripts.js"></script>
-<script>
-    document.getElementById("signupForm").addEventListener("submit", function(event) {
-        event.preventDefault(); 
-        var username = document.getElementById("signupUsername").value;
-        var password = document.getElementById("signupPassword").value;
-        fetch("/signup", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ username: username, password: password })
-        })
-        .then(response => {
-            if (response.ok) {
-                console.log("Signup successful");
-            } else {
-                console.error("Signup failed:", response.statusText);
-            }
-        })
-        .catch(error => {
-            console.error("Error during signup:", error);
-        });
-    });
-</script>
 {% endblock %}

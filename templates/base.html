@@ -8,10 +8,11 @@
     {% block head %}{% endblock %}
 </head>
 <body>
-    <header>
+    <header class="header">
         <div class="header-block">
             <img class="logo" src="{{ url_for('static', filename='PlanProLogo.png') }}" alt="PlanPro Logo">
             <h1 class="title">PlanPro - {% block title %}{% endblock %}</h1>
+            {% block username %}{% endblock %}
             <div class="login-container">
                 <button onclick="window.location.href='{{ url_for('login') }}';">Login</button>                   <!--got all the onclick=.... from chatgpt, it just redirects you to the specified page when the button is clicked -->
                 <button onclick="window.location.href='{{ url_for('signup') }}';">Sign Up</button>
@@ -19,7 +20,6 @@
         </div>
         <div class="nav-block">
             <button onclick="window.location.href='{{ url_for('index') }}';">Home</button>
-            <button onclick="window.location.href='{{ url_for('about') }}';">About</button>
             <button onclick="window.location.href='{{ url_for('gpa_tracker') }}';">GPA Tracker</button>
             <button onclick="window.location.href='{{ url_for('schedule') }}';">Schedule</button>
             <button onclick="window.location.href='{{ url_for('planner') }}';">Planner</button>

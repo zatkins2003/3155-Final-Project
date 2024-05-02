@@ -4,11 +4,86 @@
 
 {% endblock %}
 {%block title %}Schedule{% endblock %}
+{% block username %}
+{% if username %}
+<p>Logged in as - {{ username }}</p><a href="{{ url_for('logout') }}">    Sign Out</a>
+{% endif %}
+{% endblock %}
 {% block body %}
-<main>
-    
+<main class="Schedule-Planner">
+<h2 class="planner_title">Add Event</h2>
+    <form class="planner_form" action="{{ url_for('schedule') }}" method="POST">
+        <label for="event_name">Event Name:</label>
+        <input type="text" id="event_name" name="event_name" required title="Please enter alphanumeric characters and spaces only" pattern="[a-zA-Z0-9 ]+"><br>
+        <label for="due_date">Day Of Week:</label>
+            <select id="due_date" name="due_date" required>
+                <option value="Sunday">Sunday</option>
+                <option value="Monday">Monday</option>
+                <option value="Tuesday">Tuesday</option>
+                <option value="Wednesday">Wednesday</option>
+                <option value="Thursday">Thursday</option>
+                <option value="Friday">Friday</option>
+                <option value="Saturday">Saturday</option>
+            </select><br>
+        <label for="time">Time:</label>
+        <input type="time" id="time" name="time">
+
+        <button type="submit" name="add_event">Add Event</button>
+    </form>
+    <form method="POST" action="/schedule">
+        <button class="showChartBTN" type="submit" name="show_chart">Show Chart</button>
+    </form>
+    <div class="planner_container">
+        <div class="planner_days">
+            {% for day in daysOfWeekAry %}
+            <div class="bar">
+                <p class="bar-title">{{ day }}</p>
+                <div class="task_container">
+                    {% for event in events[day] %}
+                        <button class ="event" onclick="showWindow('{{ day }}', '{{ event.replace(" ", "").replace(":","") }}')">{{ event }}</button>
+                        <div class="window hidden {{ day }} {{ event.replace(" ", "").replace(":","") }}">
+                            <p>Day: {{ day }}</p>
+                            <p>Event: {{ event.split(':')[0] }}</p>
+                            <p>Time: {{ event.split(':')[1] }}:{{ event.split(':')[2] }}</p>
+                            <form method="POST" action="/schedule" onsubmit="return confirmDelete()">
+                                <input type="hidden" name="day_of_week" value="{{ day }}">
+                                <input type="hidden" name="event_name" value="{{ event }}">
+                                <button class="deleteBTN" type="submit" name="remove_event">DELETE</button>
+                            </form>
+                            <button class="closeWindowBTN" onclick="hideWindow('{{ day }}', '{{ event.replace(" ", "").replace(":","") }}')">Close Window</button>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="window {{ hidden }} chart">
+        <img src="{{ url_for('static', filename='mychart.png') }}" alt="myChart">
+        <form method="POST" action="/schedule">
+            <button class="closeWindowBTN" type="submit" name="hide_chart">Hide Chart</button>
+        </form>
+    </div>
 </main>
 <footer>
 
 </footer>
+<script>
+    function confirmDelete() {
+        if (confirm("Are you sure you want to delete this event?")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    function showWindow(day_of_week, event) {
+        const window = document.querySelector(`.${event}.${day_of_week}.window.hidden`);
+        window.classList.remove('hidden');
+    }
+    function hideWindow(day_of_week, event) {
+        const window = document.querySelector(`.${event}.${day_of_week}.window`);
+        window.classList.add('hidden');
+    }
+
+</script>
 {% endblock %}

@@ -3,26 +3,26 @@
     margin: 0px;
   }
   
-  header {
+  .header{
     background-color: #d8d8d8;
   }
   
-  .header-block {
+  .header .header-block {
     display: flex;
     align-items: center;
     padding:5px;
   }
 
-  .logo{
+  .header .logo{
     width:100px;
     height:auto;
   }
   
-  .title {
+  .header .title {
     margin: 0 20px;
   }
   
-  .login-container {
+  .header .login-container {
     display: flex;
     position:absolute;
     right: 25px;
@@ -30,24 +30,24 @@
     gap:10px;
   }
   
-  .login-container button {
+  .header .login-container button {
     margin-left: 10px;
     border:none;
     background-color: #fff;
     padding:5px 20px;
   }
 
-  .login-container button:hover{
+  .header .login-container button:hover{
     background-color: #f0f0f0;
   }
   
-  .nav-block {
+  .header .nav-block {
     display: flex;
     padding: 10px;
     background-color: rgb(202, 202, 202);
   }
   
-  .nav-block button {
+  .header .nav-block button {
     flex-grow: 1;
     margin: 0 5px;
     padding: 8px 16px;
@@ -56,14 +56,14 @@
     cursor: pointer;
   }
   
-  .nav-block button:hover {
+  .header .nav-block button:hover {
     background-color: #f0f0f0;
   }
   /*HEADER END*/
 
-  /*PLANNER START*/
+  /*PLANNER AND SCHEDULE START*/
 
-  .planner_form{
+  .Schedule-Planner .planner_form{
     display:flex;
     flex-direction:row;
     margin:50px;
@@ -73,41 +73,217 @@
     justify-content: center;
     gap:10px;
   }
-
-  .planner_title{
+  .Schedule-Planner .planner_form button{
+    background-color: rgb(41, 41, 41);
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding:10px;
+    border-radius: 5px;
+  }
+  .Schedule-Planner .planner_title{
     width:100%;
     text-align: center;
   }
 
-  .planner_container{
+  .Schedule-Planner .planner_container{
     padding:20px;
   }
 
-  .planner_days{
+  .Schedule-Planner .planner_days{
     display:flex;
     justify-content: space-around;
     
   }
 
-  .bar {
+  .Schedule-Planner .bar {
     width: 220px;
     background-color: lightblue;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    position: relative;
 }
 
-  .task_container{
-    min-height:500px;
+  .Schedule-Planner .bar-title {
+    position:absolute;
+    left: 50%;
+    transform: translateX(-50%);
+
   }
 
-  .task{
+.Schedule-Planner .task_container{
+    min-height:500px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 70px;
+  }
+
+  .Schedule-Planner .task{
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 220px;
+    width: 100%;
     border-style: none;
-    background-color: lightblue;
+    background-color: rgb(136, 198, 219);
+    padding: 10px 10px;
   }
 
-  /*Planner END*/
+  .Schedule-Planner .event_container{
+    min-height:500px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 70px;
+
+  }
+
+  .Schedule-Planner .event{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    border-style: none;
+    background-color: rgb(136, 198, 219);
+    padding: 10px 10px;
+  }
+
+  .Schedule-Planner .window{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    background-color: white;
+    box-shadow: 0px 0px 50px rgba(0, 0, 0);
+    height: 70vh;
+    width: 40vw;
+    transition: opacity .25s ease-in-out;
+  }
+
+  .Schedule-Planner .hidden{
+    opacity: 0;
+    display: none;
+  }
+
+  .Schedule-Planner .window .deleteBTN {
+    background-color: red;
+    color: white;
+    position: absolute;
+    bottom: 10px;
+    right: 150px;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+  .Schedule-Planner .window .closeWindowBTN {
+    background-color: gray;
+    color: white;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+  .showChartBTN {
+  background-color: rgb(41, 41, 41);
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-left:30px;
+  }
+
+  .Schedule-Planner .window p {
+    font-size: 30px;
+    padding:30px;
+  }
+
+
+  /*PLANNER AND SCHEDULEEND*/
+
+  .gpa-form {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background: lightblue;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .gpa-form .course {
+    margin-bottom: 10px;
+  }
+  
+  .gpa-form label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .gpa-form input[type="text"],
+  .gpa-form input[type="number"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid lightblue;
+    border-radius: 4px;
+  }
+  
+  .gpa-form button {
+    padding: 10px 20px;
+    margin-top: 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .gpa-form button:hover {
+    background-color: #0056b3;
+  }
+
+  .gpa h1{
+    width: 100%;
+    text-align: center;
+  }
+  
+  /* Styles for course list */
+  .course-list {
+    margin-top: 20px;
+    padding: 15px;
+    background: #f8f8f8;
+    border-left: 5px solid #007BFF;
+  }
+  
+  .course-list li {
+    margin-bottom: 10px;
+  }
+  
+  /* Error Message Styles */
+  .error-message {
+    color: red;
+    margin-top: 20px;
+  }
+
+  .home img {
+    width: 33vw;
+    height: auto;
+  }
+
+  .home .title {
+    width:100%;
+    display:flex;
+    justify-content: center;
+  }
+
+  .home .about{
+    margin:50px;
+    font-size:large;
+  }
+
+  .home img {
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 10px 10px;
+  }
